@@ -1,0 +1,92 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2rem;
+}
+
+button {
+    background: none;
+    border: solid black 2px;
+    margin-block: 1rem;
+    min-height: fit-content;
+    font-size: large;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    max-width: max(50%,12rem);
+}
+
+button:hover {
+    background: black;
+    color: white;
+    transition: 0.4s;
+}
+
+.player-round-data {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    max-width: 8rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.input-number, .input-number:focus, .input-number:active {
+    outline: none;
+    border: none;
+    font-weight: bold;
+    font-size: x-large;
+    max-width: 4rem;
+}
+
+.winner-image {
+    margin-top: 2rem;
+}
+
+.link {
+    margin-top: 2rem;
+    margin-left: 4rem;
+}
+
+.error {
+    color: red;
+    font-size: x-large;
+}
