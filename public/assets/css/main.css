@@ -19,6 +19,8 @@ main {
     padding: 1rem;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
 }
 
 form {
@@ -30,6 +32,7 @@ form {
 button {
     background: none;
     border: solid black 2px;
+    color: black;
     margin-block: 1rem;
     min-height: fit-content;
     font-size: large;
