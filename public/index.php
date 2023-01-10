@@ -19,7 +19,9 @@
         <h1>AoS Battle Tracker</h1>
         <span class="error"><?=isset($_GET["error"]) ? urldecode($_GET["error"]) : null?></span>
         <?php if($currentRound->round_number<=5) :?>
-        <h2>Current Winner: <?=$currentWinner?></h2>
+            <?php if($currentRound->round_number !== 1) : ?>
+            <h2>Current Winner: <?=$currentWinner?></h2>
+            <?php endif; ?>
         <h2>Round Number <input class="input-number" type="number" value="<?=$currentRound->round_number?>" form="rounds" name="round_number"/></h2>
         <form id="rounds" method="POST" action="api/rounds.php">
             <section class="player-round-data">
