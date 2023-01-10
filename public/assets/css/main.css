@@ -15,12 +15,16 @@ body {
     justify-content: center;
 }
 
+h1 {
+    white-space: pre-wrap;
+}
+
 main {
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
+    margin-bottom: 2rem;
+    max-width: 100vw;
 }
 
 form {
@@ -39,7 +43,7 @@ button {
     padding: 0.5rem 1rem;
     border-radius: 10px;
     cursor: pointer;
-    max-width: max(50%,12rem);
+    max-width: 14rem
 }
 
 button:hover {
