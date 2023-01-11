@@ -1,5 +1,6 @@
 <?php
-    include($_SERVER['DOCUMENT_ROOT']."/src/models/round.php");
+    use Models\Round;
+    require($_SERVER['DOCUMENT_ROOT']."/src/models/round.php");
 
     function returnError($msg,$round) {
         $error_msg = urlencode($msg);
@@ -8,16 +9,16 @@
     }
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $completedRound = Round::createInstance($_POST);
+        $completed_round = Round::createInstance($_POST);
 
-        if(!$completedRound->areUniqueNames()) {
-            returnError("Player names must be unique.",$completedRound);
+        if(!$completed_round->areUniqueNames()) {
+            returnError("Player names must be unique.",$completed_round);
             exit();
         }
 
-        $completedRound->advanceRound();
+        $completed_round->advanceRound();
 
-        $query = http_build_query($completedRound);
+        $query = http_build_query($completed_round);
 
         header( "Location: http://{$_SERVER['HTTP_HOST']}?$query", true, 303 );
         exit();

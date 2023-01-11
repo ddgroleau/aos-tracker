@@ -1,4 +1,5 @@
 <?php
+namespace Models;
 class Round {
     private function __construct($array)
     {
