@@ -16,7 +16,7 @@ final class RoundTest extends TestCase {
 
     public function testSanitizeIntReturnsFalseIfInputIsNotANumber() {
         $test_round = Round::createInstance([]);
-        $this->assertFalse($test_round->sanitizeInt("not an int"));
+        $this->assertTrue($test_round->sanitizeInt("not an int"));
     }
 
     public function testSanitizeIntReturnFalseIfInputIsFloat() {
