@@ -1,6 +1,6 @@
 <?php
-    use Models\Round;
-    require($_SERVER['DOCUMENT_ROOT']."/src/models/round.php");
+use Models\Round;
+    require($_SERVER['DOCUMENT_ROOT']."/src/models/Round.php");
 
     $current_round =  Round::createInstance($_GET);
     $current_winner = $current_round->getCurrentWinner();

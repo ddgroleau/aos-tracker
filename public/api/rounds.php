@@ -1,6 +1,6 @@
 <?php
     use Models\Round;
-    require($_SERVER['DOCUMENT_ROOT']."/src/models/round.php");
+    require($_SERVER['DOCUMENT_ROOT']."/src/models/Round.php");
 
     function returnError($msg,$round) {
         $error_msg = urlencode($msg);
