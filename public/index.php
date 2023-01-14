@@ -27,33 +27,33 @@ use Models\Round;
         <form id="rounds" method="POST" action="api/rounds.php">
             <section class="player-round-data">
                 <div class="form-item">
-                    <label for="p1_name">Player 1 Name:</label>
-                    <input type="text" id="p1_name" name="p1_name" value="<?=$current_round->p1_name?>" required pattern="[a-zA-Z0-9]+"/>
+                    <label for="player1_name">Player 1 Name:</label>
+                    <input type="text" id="player1_name" name="player1_name" value="<?=$current_round->player1_name?>" required pattern="[a-zA-Z0-9]+"/>
                 </div>
                 <div class="form-item">
-                    <label id="p1_cp">Command Points Player 1</label>
-                    <input id="p1_cp" type="number" name="p1_cp" value="<?=$current_round->p1_cp?>" min="0" max="10">
+                    <label id="player1_command_points">Command Points Player 1</label>
+                    <input id="player1_command_points" type="number" name="player1_command_points" value="<?=$current_round->player1_command_points?>" min="0" max="10">
                 </div>
                 <div class="form-item">
-                    <label for="p1_vp">Victory Points Player 1</label>
-                    <input id="p1_vp" type="number" name="p1_vp" value="<?=$current_round->p1_vp?>" min="0" max="10">
+                    <label for="player1_victory_points">Victory Points Player 1</label>
+                    <input id="player1_victory_points" type="number" name="player1_victory_points" value="<?=$current_round->player1_victory_points?>" min="0" max="10">
                 </div>
-                <h3>Player 1 VP Total: <input class="input-number" type="number" value="<?=$current_round->p1_vp_total?>" name="p1_vp_total" min="0" max="20"/></h3>
+                <h3>Player 1 VP Total: <input class="input-number" type="number" value="<?=$current_round->player1_victory_points_total?>" name="player1_victory_points_total" min="0" max="20"/></h3>
             </section>
             <section class="player-round-data">
                 <div class="form-item">
-                    <label for="p2_name">Player 2 Name:</label>
-                    <input type="text" id="p2_name" name="p2_name" value="<?=$current_round->p2_name?>" required pattern="[a-zA-Z0-9]+"/>
+                    <label for="player2_name">Player 2 Name:</label>
+                    <input type="text" id="player2_name" name="player2_name" value="<?=$current_round->player2_name?>" required pattern="[a-zA-Z0-9]+"/>
                 </div>
                 <div class="form-item">
-                    <label for="p2_cp">Command Points Player 2</label>
-                    <input id="p2_cp" type="number" name="p2_cp" value="<?=$current_round->p2_cp?>" min="0" max="10"/>
+                    <label for="player2_command_points">Command Points Player 2</label>
+                    <input id="player2_command_points" type="number" name="player2_command_points" value="<?=$current_round->player2_command_points?>" min="0" max="10"/>
                 </div>
                 <div class="form-item">
-                    <label for="p2_vp">Victory Points Player 2</label>
-                    <input id="p2_vp" type="number" name="p2_vp" value="<?=$current_round->p2_vp?>" min="0" max="10"/>
+                    <label for="player2_victory_points">Victory Points Player 2</label>
+                    <input id="player2_victory_points" type="number" name="player2_victory_points" value="<?=$current_round->player2_victory_points?>" min="0" max="10"/>
                 </div>
-                <h3>Player 2 VP Total: <input class="input-number" type="number" value="<?=$current_round->p2_vp_total?>" name="p2_vp_total" min="0" max="20"/></h3>
+                <h3>Player 2 VP Total: <input class="input-number" type="number" value="<?=$current_round->player2_victory_points_total?>" name="player2_victory_points_total" min="0" max="20"/></h3>
             </section>
         </form>
         <button form="rounds" type="submit">Advance to Next Round</button>

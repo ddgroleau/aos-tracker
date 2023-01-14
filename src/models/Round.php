@@ -1,55 +1,56 @@
 <?php
+declare(strict_types=1);
 namespace Models;
 class Round {
-    private function __construct($array)
+    private function __construct(array $array)
     {
         $this->round_number = isset($array["round_number"]) ? $this->sanitizeInt($array["round_number"]) : 1;
-        $this->p1_name = isset($array["p1_name"]) ? htmlspecialchars($array["p1_name"]) : "";
-        $this->p1_cp = isset($array["p1_cp"]) ? $this->sanitizeInt($array["p1_cp"]) : 0;
-        $this->p1_vp = isset($array["p1_vp"]) ? $this->sanitizeInt($array["p1_vp"]) : 0;
-        $this->p1_vp_total = isset($array["p1_vp_total"]) ? $this->sanitizeInt($array["p1_vp_total"]) : 0;
-        $this->p2_name = isset($array["p2_name"]) ? htmlspecialchars($array["p2_name"]) : "";
-        $this->p2_cp = isset($array["p2_cp"]) ? $this->sanitizeInt($array["p2_cp"]) : 0;
-        $this->p2_vp = isset($array["p2_vp"]) ? $this->sanitizeInt($array["p2_vp"]) : 0;
-        $this->p2_vp_total = isset($array["p2_vp_total"]) ? $this->sanitizeInt($array["p2_vp_total"]) : 0;
+        $this->player1_name = isset($array["player1_name"]) ? htmlspecialchars($array["player1_name"]) : "";
+        $this->player1_command_points = isset($array["player1_command_points"]) ? $this->sanitizeInt($array["player1_command_points"]) : 0;
+        $this->player1_victory_points = isset($array["player1_victory_points"]) ? $this->sanitizeInt($array["player1_victory_points"]) : 0;
+        $this->player1_victory_points_total = isset($array["player1_victory_points_total"]) ? $this->sanitizeInt($array["player1_victory_points_total"]) : 0;
+        $this->player2_name = isset($array["player2_name"]) ? htmlspecialchars($array["player2_name"]) : "";
+        $this->player2_command_points = isset($array["player2_command_points"]) ? $this->sanitizeInt($array["player2_command_points"]) : 0;
+        $this->player2_victory_points = isset($array["player2_victory_points"]) ? $this->sanitizeInt($array["player2_victory_points"]) : 0;
+        $this->player2_victory_points_total = isset($array["player2_victory_points_total"]) ? $this->sanitizeInt($array["player2_victory_points_total"]) : 0;
     }
-    public $round_number;
-    public $p1_name;
-    public $p1_cp;
-    public $p1_vp;
-    public $p1_vp_total;
-    public $p2_name;
-    public $p2_cp;
-    public $p2_vp;
-    public $p2_vp_total;
+    public int $round_number;
+    public string $player1_name;
+    public int $player1_command_points;
+    public int $player1_victory_points;
+    public int $player1_victory_points_total;
+    public string $player2_name;
+    public int $player2_command_points;
+    public int $player2_victory_points;
+    public int $player2_victory_points_total;
 
-    public static function createInstance($array) {
+    public static function createInstance(array $array):Round {
         return new Round($array);
     }
 
-    public function areUniqueNames() {
-        return $this->p1_name !== $this->p2_name;
+    public function areUniqueNames():bool {
+        return $this->player1_name !== $this->player2_name;
     }
 
     public function sanitizeInt($int) {
-        return filter_var(htmlspecialchars($int), FILTER_VALIDATE_INT);
+        return filter_var(htmlspecialchars("$int"), FILTER_VALIDATE_INT);
     }
 
-    public function advanceRound() {
+    public function advanceRound():void {
         $this->round_number += 1;
-        $this->p1_vp_total += $this->p1_vp;
-        $this->p2_vp_total += $this->p2_vp;
-        $this->p1_cp = 0;
-        $this->p2_cp = 0;
-        $this->p1_vp = 0;
-        $this->p2_vp = 0;
+        $this->player1_victory_points_total += $this->player1_victory_points;
+        $this->player2_victory_points_total += $this->player2_victory_points;
+        $this->player1_command_points = 0;
+        $this->player2_command_points = 0;
+        $this->player1_victory_points = 0;
+        $this->player2_victory_points = 0;
     }
 
-    public function getCurrentWinner() {
-        if($this->p1_vp_total === $this->p2_vp_total)
+    public function getCurrentWinner():string {
+        if($this->player1_victory_points_total === $this->player2_victory_points_total)
                 return "Tie";
-        if($this->p1_vp_total < $this->p2_vp_total)
-                return $this->p2_name;
-        else return $this->p1_name;
+        if($this->player1_victory_points_total < $this->player2_victory_points_total)
+                return $this->player2_name;
+        else return $this->player1_name;
     }
 }

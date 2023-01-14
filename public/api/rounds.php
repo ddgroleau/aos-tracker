@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
     use Models\Round;
     require($_SERVER['DOCUMENT_ROOT']."/src/models/Round.php");
 
-    function returnError($msg,$round) {
+    function returnError($msg,$round):void {
         $error_msg = urlencode($msg);
         $query = http_build_query($round);
         header( "Location: http://{$_SERVER['HTTP_HOST']}?error=$error_msg&$query", true, 303 );
