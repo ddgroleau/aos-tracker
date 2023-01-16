@@ -6,4 +6,4 @@ else docker stop aos_tracker && docker rm aos_tracker;
 fi;
 
 docker build . -t aos_tracker
-docker run -d -p 4000:80 --name aos_tracker --network webnet1 -e DB_HOST="$DB_HOST" -e DB_USER="$DB_USER" -e DB_PASS="$DB_PASS" aos_tracker
+docker run -d -p 4000:80 --name aos_tracker --network "$APP_NETWORK" -e DB_HOST="$DB_HOST" -e DB_USER="$DB_USER" -e DB_PASS="$DB_PASS" aos_tracker

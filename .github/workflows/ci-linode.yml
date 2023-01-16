@@ -52,21 +52,22 @@ jobs:
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
+          APP_NETWORK: ${{ secrets.APP_NETWORK }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER_NAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }} 
           passphrase: ${{ secrets.PASSPHRASE }}
-          envs: HOST_PORT,DB_HOST,DB_USER,DB_PASS
+          envs: HOST_PORT,DB_HOST,DB_USER,DB_PASS,APP_NETWORK
           script: |
-            export envArray=( "$HOST_PORT" "$DB_HOST" "$DB_USER" "$DB_PASS" ) \
+            export envArray=( "$HOST_PORT" "$DB_HOST" "$DB_USER" "$DB_PASS" "$APP_NETWORK" ) \
             && docker pull thoughtspring/aos-tracker \
             && if [[ -z $(docker container ls -a | grep "aos-tracker") ]]; \
             then echo "No container found. Starting aos-tracker container..."; \
             else docker stop aos-tracker && docker rm aos-tracker; \
             fi \
-            && docker run -d -p "${envArray[0]}":80 --name aos-tracker --restart always \
+            && docker run -d -p "${envArray[0]}":80 --name aos-tracker --restart always --network "${envArray[4]}" \
             -e DB_HOST="${envArray[1]}" \
             -e DB_USER="${envArray[2]}" \
             -e DB_PASS="${envArray[3]}" \
