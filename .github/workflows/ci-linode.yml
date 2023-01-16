@@ -49,22 +49,27 @@ jobs:
         uses: appleboy/ssh-action@master
         env:
           HOST_PORT: ${{ secrets.HOST_PORT }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASS: ${{ secrets.DB_PASS }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER_NAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }} 
           passphrase: ${{ secrets.PASSPHRASE }}
-          envs: HOST_PORT
+          envs: HOST_PORT,DB_HOST,DB_USER,DB_PASS
           script: |
-            export envArray=( $HOST_PORT ) \
+            export envArray=( "$HOST_PORT" "$DB_HOST" "$DB_USER" "$DB_PASS" ) \
             && docker pull thoughtspring/aos-tracker \
             && if [[ -z $(docker container ls -a | grep "aos-tracker") ]]; \
             then echo "No container found. Starting aos-tracker container..."; \
             else docker stop aos-tracker && docker rm aos-tracker; \
             fi \
             && docker run -d -p "${envArray[0]}":80 --name aos-tracker --restart always \
-            -e NODE_ENV="production" \
+            -e DB_HOST="${envArray[1]}" \
+            -e DB_USER="${envArray[2]}" \
+            -e DB_PASS="${envArray[3]}" \
             thoughtspring/aos-tracker \
             && exit \
             && exit 0;

@@ -1,8 +1,7 @@
 <?php
-use Models\Round;
-    require($_SERVER['DOCUMENT_ROOT']."/src/models/Round.php");
-
-    $current_round =  Round::createInstance($_GET);
+use Core\Models\BattleRound;
+require_once($_SERVER['DOCUMENT_ROOT']."/src/core/models/BattleRound.php");
+    $current_round =  BattleRound::createInstance($_GET);
     $current_winner = $current_round->getCurrentWinner();
 ?>
 
@@ -24,7 +23,13 @@ use Models\Round;
             <h2>Current Winner: <?=$current_winner?></h2>
             <?php endif; ?>
         <h2>Round Number <input class="input-number" type="number" value="<?=$current_round->round_number?>" form="rounds" name="round_number"/></h2>
-        <form id="rounds" method="POST" action="api/rounds.php">
+        <?php if($current_round->battle_id !== "") :?>
+            <h3>
+                Battle ID: <?=$current_round->battle_id ?>
+            </h3>
+            <input form="rounds" type="hidden" value="<?=$current_round->battle_id ?>" id="battle_id" name="battle_id" />
+        <?php endif; ?>
+        <form id="rounds" method="POST" action="api/battle-rounds.php">
             <section class="player-round-data">
                 <div class="form-item">
                     <label for="player1_name">Player 1 Name:</label>
@@ -58,6 +63,7 @@ use Models\Round;
         </form>
         <button form="rounds" type="submit">Advance to Next Round</button>
         <button form="rounds" type="reset" onclick="window.location.href=window.origin">Reset</button>
+        <a href="/join">Join an existing game</a>
         <?php else :?>
             <h2>The winner is: <?=$current_winner?>!</h2>
             <img class="winner-image" src="/assets/media/wizard-hat.svg" height="200" width="200" alt="wizard hat" />

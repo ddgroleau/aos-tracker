@@ -1,37 +1,37 @@
 <?php declare(strict_types=1);
 
-use Models\Round;
+use Core\Models\BattleRound;
 use PHPUnit\Framework\TestCase;
-require(dirname(__DIR__, 1).'/src/models/Round.php');
+require_once(dirname(__DIR__, 1).'/src/core/models/BattleRound.php');
 
-final class RoundTest extends TestCase {
+final class BattleRoundTest extends TestCase {
     public function testCreateInstanceReturnsNewInstanceFromAssociativeArray() {
-        $this->assertInstanceOf(Round::class, Round::createInstance([]));
+        $this->assertInstanceOf(BattleRound::class, BattleRound::createInstance([]));
     }
 
     public function testAreUniqueNamesReturnsFalseIfPlayerNamesAreNotUnique() {
-        $test_round = Round::createInstance(["player1_name" => "test", "player2_name" => "test"]);
+        $test_round = BattleRound::createInstance(["player1_name" => "test", "player2_name" => "test"]);
         $this->assertFalse($test_round->areUniqueNames());
     }
 
     public function testSanitizeIntReturnsFalseIfInputIsNotANumber() {
-        $test_round = Round::createInstance([]);
+        $test_round = BattleRound::createInstance([]);
         $this->assertFalse($test_round->sanitizeInt("not an int"));
     }
 
     public function testSanitizeIntReturnFalseIfInputIsFloat() {
-        $test_round = Round::createInstance([]);
+        $test_round = BattleRound::createInstance([]);
         $this->assertFalse($test_round->sanitizeInt(1.11));
     }
 
     public function testSanitizeIntReturnIntIfInputIsInt() {
-        $test_round = Round::createInstance([]);
+        $test_round = BattleRound::createInstance([]);
         $this->assertEquals(9,$test_round->sanitizeInt(9));
     }
 
     public function testAdvanceRoundUpdatesPropertyValues()
     {
-        $test_round = Round::createInstance([
+        $test_round = BattleRound::createInstance([
             "round_number" => 1,
             "player1_victory_points_total" => 0,
             "player2_victory_points_total" => 0,
@@ -48,7 +48,7 @@ final class RoundTest extends TestCase {
     }
 
     public function testGetCurrentWinnerReturnsWinnerName() {
-        $test_round = Round::createInstance([
+        $test_round = BattleRound::createInstance([
             "player1_name"=>"test1",
             "player2_name"=>"test2",
             "round_number" => 1,
